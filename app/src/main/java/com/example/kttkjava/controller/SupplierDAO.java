@@ -14,11 +14,34 @@ public class SupplierDAO extends DAO {
     public SupplierDAO() {
         super();
     }
+    public ArrayList<Supplier> getAllSuppliers() {
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        try {
+            Connection conn = getConnection();
+            String query = "SELECT * FROM suppliers";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("des");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                String email = rs.getString("email");
+                Supplier supplier = new Supplier(id, name, description, address, phone, email);
+                suppliers.add(supplier);
+            }
+            closeConnection();
+        } catch (SQLException e) {
+            Log.e("SupplierDAO", "Error retrieving suppliers: " + e.getMessage());
+        }
+        return suppliers;
+    }
 
     public ArrayList<Supplier> searchByName(String name) {
         ArrayList<Supplier> suppliers = new ArrayList<>();
         try {
-            Connection conn = getConnection();
+            Connection conn = getConnection(); // Use the connection from the DAO class
             String query = "SELECT * FROM suppliers WHERE name LIKE ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, "%" + name + "%");

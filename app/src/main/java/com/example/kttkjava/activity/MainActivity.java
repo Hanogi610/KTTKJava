@@ -1,7 +1,9 @@
 package com.example.kttkjava.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.example.kttkjava.controller.SupplierDAO;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private Button supplierManagementButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +31,27 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        supplierManagementButton = findViewById(R.id.supplier);
+
         // Create an instance of SupplierDAO
         SupplierDAO supplierDAO = new SupplierDAO();
 
-        // Call the searchByName method with the dummy input "sea"
-        ArrayList<Supplier> suppliers = supplierDAO.searchByName("sea");
+        supplierManagementButton.setOnClickListener(v -> {
+            new LoadSuppliersTask().execute("Sea");
+        });
+    }
 
-        // Log the results
-        for (Supplier supplier : suppliers) {
-            Log.d("MainActivity", "Supplier ID: " + supplier.getId() + ", Name: " + supplier.getName());
+    private class LoadSuppliersTask extends AsyncTask<String, Void, ArrayList<Supplier>> {
+        @Override
+        protected ArrayList<Supplier> doInBackground(String... strings) {
+            return new SupplierDAO().getAllSuppliers();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Supplier> suppliers) {
+            super.onPostExecute(suppliers);
+            // Update UI on main thread
+            Log.d("MainActivity", "Suppliers: " + suppliers.size());
         }
     }
 }
