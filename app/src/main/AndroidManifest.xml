@@ -13,22 +13,34 @@
         android:theme="@style/Theme.KTTKJava"
         tools:targetApi="31">
         <activity
-            android:name=".ProductSearch"
+            android:name=".activity.Statistic"
             android:exported="false" />
         <activity
-            android:name=".EditSupplier"
+            android:name=".activity.PurchaseInvoice"
             android:exported="false" />
         <activity
-            android:name=".AddNewSupplier"
+            android:name=".activity.ProductImport"
             android:exported="false" />
         <activity
-            android:name=".SupplierManagement"
+            android:name=".activity.NewProduct"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ProductSearch"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddNewSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SupplierManagement"
             android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

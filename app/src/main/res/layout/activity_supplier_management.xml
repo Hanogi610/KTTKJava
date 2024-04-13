@@ -5,18 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SupplierManagement">
+    tools:context=".activity.SupplierManagement">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/supplier_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/supplier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/supplier_search_input" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_new_supllier_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +43,7 @@
         android:id="@+id/supplier_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_button" />

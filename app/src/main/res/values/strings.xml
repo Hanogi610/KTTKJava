@@ -20,4 +20,22 @@
     <string name="update">Update</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="product">Product...</string>
+    <string name="add_new_product">Add New Product</string>
+    <string name="product_name">Product name\n</string>
+    <string name="product_description">product description\n</string>
+    <string name="product_buy_price">product buy price</string>
+    <string name="add_product">Add\n</string>
+    <string name="add">Add</string>
+    <string name="quantity">Quantity</string>
+    <string name="checkout">Checkout</string>
+    <string name="confirm">Confirm</string>
+    <string name="address">Address</string>
+    <string name="statistic_name">lending partner name</string>
+    <string name="detail">Detail</string>
+    <array name="payment_methods">
+        <item>Cash</item>
+        <item>Bank transfer</item>
+        <item>Paypal</item>
+    </array>
 </resources>

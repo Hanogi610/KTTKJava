@@ -38,6 +38,10 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
+    implementation  ("android.arch.persistence.room:runtime:1.0.0")
+    implementation ("mysql:mysql-connector-java:8.0.33")
+    annotationProcessor  ("android.arch.persistence.room:compiler:1.0.0")
+    implementation ("com.google.android.material:material:1.4.0")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

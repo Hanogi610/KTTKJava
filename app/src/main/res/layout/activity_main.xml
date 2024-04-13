@@ -5,36 +5,38 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <EditText
-        android:id="@+id/username"
+    <Button
+        android:id="@+id/supplier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:hint="@string/username"
+        android:layout_marginTop="216dp"
+        android:text="@string/supplier_management"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Button
+        android:id="@+id/import_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:id="@+id/password"
-        android:inputType="textPassword"
+        android:layout_marginTop="36dp"
+        android:text="@string/import_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/supplier" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/lpstatistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:layout_marginTop="44dp"
+        android:text="@string/lending_partner_revenue_statistics"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/import_product" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
