@@ -3,4 +3,21 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Log in</string>
+    <string name="supplier_management">Supplier Management</string>
+    <string name="import_product">Import Product</string>
+    <string name="lending_partner_revenue_statistics">Lending Partner Revenue Statistics</string>
+    <string name="supplier">Supplier...</string>
+    <string name="search">Search</string>
+    <string name="add_new_supllier">Add new supllier</string>
+    <string name="supplier_address">Supplier address</string>
+    <string name="supplier_phone">Supplier phone</string>
+    <string name="supplier_email">Supplier email</string>
+    <string name="supplier_description">Supplier description</string>
+    <string name="add_supplier">Add supplier</string>
+    <string name="cancel">Cancel</string>
+    <string name="supplier_name">Supplier name</string>
+    <string name="reset">Reset</string>
+    <string name="update">Update</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

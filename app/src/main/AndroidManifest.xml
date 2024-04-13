@@ -13,6 +13,21 @@
         android:theme="@style/Theme.KTTKJava"
         tools:targetApi="31">
         <activity
+            android:name=".ProductSearch"
+            android:exported="false" />
+        <activity
+            android:name=".EditSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".AddNewSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".SupplierManagement"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
