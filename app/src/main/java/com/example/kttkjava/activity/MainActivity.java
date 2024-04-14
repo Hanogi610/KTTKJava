@@ -1,6 +1,7 @@
 package com.example.kttkjava.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static AppDatabase instance;
-    private Button supplierManagementButton;
+    private Button supplierManagementButton,importProductButton, statisticButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +35,33 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        instance = getInstance(this);
+        instance = AppDatabase.getInstance(this);
+//        Supplier a = new Supplier("supplier a","supllier a","hn vn","0","ss@gmail.com");
+//        new insertSupplier().execute(a);
         supplierManagementButton = findViewById(R.id.supplier);
+        importProductButton = findViewById(R.id.import_product);
+        statisticButton = findViewById(R.id.lpstatistic);
+
+        supplierManagementButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SupplierManagement.class);
+            startActivity(intent);
+        });
+        importProductButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SupplierManagement.class);
+            startActivity(intent);
+        });
+        statisticButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Statistic.class);
+            startActivity(intent);
+        });
     }
 
-    public static synchronized AppDatabase getInstance(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "BNPL_database")
-                    .addCallback(new AppDatabaseCallback(context.getApplicationContext()))
-                    .build();
-        }
-        return instance;
-    }
-
+//    class insertSupplier extends AsyncTask<Supplier,Void, Void>{
+//        @Override
+//        protected Void doInBackground(Supplier... notes) {
+//            instance.supplierDAO().insert(notes[0]);
+//
+//            return null;
+//        }
+//    }
 }

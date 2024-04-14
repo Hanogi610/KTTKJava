@@ -21,10 +21,11 @@
 
     <TextView
         android:id="@+id/product_quantity_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Product - Quantity"
         android:textSize="18sp"
+        android:padding="5sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/shipping_address_edittext"
         app:layout_constraintStart_toStartOf="parent" />
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="Supplier"
         android:textSize="18sp"
+        android:padding="5sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/product_quantity_textview"
         app:layout_constraintStart_toStartOf="parent" />
@@ -43,20 +45,17 @@
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/confirm"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/supplier_textview" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#F44336"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/supplier_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
