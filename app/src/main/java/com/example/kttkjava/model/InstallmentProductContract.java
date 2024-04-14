@@ -1,30 +1,39 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+import androidx.room.Relation;
+import androidx.room.TypeConverters;
+
+import com.example.kttkjava.controller.Converter;
+
 import java.util.Date;
 import java.util.List;
 
+@Entity(tableName = "installment_product_contract",foreignKeys = {
+		@ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id"),
+		@ForeignKey(entity = LendingPartner.class, parentColumns = "id", childColumns = "lending_partner_id")})
 public class InstallmentProductContract {
 
+
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private double totalAmount;
 	private double amountRemaining;
 	private double penaltyRate;
-	private Date createDate;
+	private String createDate;
 	private String createAddress;
-	private Date firstDatePaid;
+	private String firstDatePaid;
 	private double amountPaidEachCycle;
 	private String dayPaidPerCycle;
 	private String status;
-	private Customer cus;
-	private LendingPartner lendingPartner;
-	private List<Payment> payments;
-	private int maximumDayOutstanding;
-	private List<InstallmentProduct> productList;
-	private List<CollateralInContract> collateralList;
-	private LendingPartner lp;
 
-	public InstallmentProductContract(int id, double totalAmount, double amountRemaining, double penaltyRate, Date createDate, String createAddress, Date firstDatePaid, double amountPaidEachCycle, String dayPaidPerCycle, String status, Customer cus, LendingPartner lendingPartner, List<Payment> payments, int maximumDayOutstanding, List<InstallmentProduct> productList, List<CollateralInContract> collateralList, LendingPartner lp) {
-		this.id = id;
+	// Foreign keys
+	private int customer_id; // Foreign key to Customer
+	private int lending_partner_id;
+
+	public InstallmentProductContract(double totalAmount, double amountRemaining, double penaltyRate, String createDate, String createAddress, String firstDatePaid, double amountPaidEachCycle, String dayPaidPerCycle, String status, int customer_id, int lending_partner_id) {
 		this.totalAmount = totalAmount;
 		this.amountRemaining = amountRemaining;
 		this.penaltyRate = penaltyRate;
@@ -34,13 +43,8 @@ public class InstallmentProductContract {
 		this.amountPaidEachCycle = amountPaidEachCycle;
 		this.dayPaidPerCycle = dayPaidPerCycle;
 		this.status = status;
-		this.cus = cus;
-		this.lendingPartner = lendingPartner;
-		this.payments = payments;
-		this.maximumDayOutstanding = maximumDayOutstanding;
-		this.productList = productList;
-		this.collateralList = collateralList;
-		this.lp = lp;
+		this.customer_id = customer_id;
+		this.lending_partner_id = lending_partner_id;
 	}
 
 	public int getId() {
@@ -75,11 +79,11 @@ public class InstallmentProductContract {
 		this.penaltyRate = penaltyRate;
 	}
 
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
@@ -91,11 +95,11 @@ public class InstallmentProductContract {
 		this.createAddress = createAddress;
 	}
 
-	public Date getFirstDatePaid() {
+	public String getFirstDatePaid() {
 		return firstDatePaid;
 	}
 
-	public void setFirstDatePaid(Date firstDatePaid) {
+	public void setFirstDatePaid(String firstDatePaid) {
 		this.firstDatePaid = firstDatePaid;
 	}
 
@@ -123,59 +127,19 @@ public class InstallmentProductContract {
 		this.status = status;
 	}
 
-	public Customer getCus() {
-		return cus;
+	public int getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setCus(Customer cus) {
-		this.cus = cus;
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
-	public LendingPartner getLendingPartner() {
-		return lendingPartner;
+	public int getLending_partner_id() {
+		return lending_partner_id;
 	}
 
-	public void setLendingPartner(LendingPartner lendingPartner) {
-		this.lendingPartner = lendingPartner;
-	}
-
-	public List<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
-	}
-
-	public int getMaximumDayOutstanding() {
-		return maximumDayOutstanding;
-	}
-
-	public void setMaximumDayOutstanding(int maximumDayOutstanding) {
-		this.maximumDayOutstanding = maximumDayOutstanding;
-	}
-
-	public List<InstallmentProduct> getProductList() {
-		return productList;
-	}
-
-	public void setProductList(List<InstallmentProduct> productList) {
-		this.productList = productList;
-	}
-
-	public List<CollateralInContract> getCollateralList() {
-		return collateralList;
-	}
-
-	public void setCollateralList(List<CollateralInContract> collateralList) {
-		this.collateralList = collateralList;
-	}
-
-	public LendingPartner getLp() {
-		return lp;
-	}
-
-	public void setLp(LendingPartner lp) {
-		this.lp = lp;
+	public void setLending_partner_id(int lending_partner_id) {
+		this.lending_partner_id = lending_partner_id;
 	}
 }

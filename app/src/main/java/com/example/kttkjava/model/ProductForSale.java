@@ -1,23 +1,31 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "product_for_sale",foreignKeys = {
+		@ForeignKey(entity = Product.class, parentColumns = "id", childColumns = "product_id")
+})
 public class ProductForSale {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String name;
 	private double price;
 	private String des;
 	private String warehouse;
 	private int remainInWarehouse;
-	private Product product;
+	private int product_id;
 
-	public ProductForSale(int id, String name, double price, String des, String warehouse, int remainInWarehouse, Product product) {
-		this.id = id;
+
+	public ProductForSale(String name, double price, String des, String warehouse, int remainInWarehouse, int product_id) {
 		this.name = name;
 		this.price = price;
 		this.des = des;
 		this.warehouse = warehouse;
 		this.remainInWarehouse = remainInWarehouse;
-		this.product = product;
+		this.product_id = product_id;
 	}
 
 	public int getId() {
@@ -68,11 +76,11 @@ public class ProductForSale {
 		this.remainInWarehouse = remainInWarehouse;
 	}
 
-	public Product getProduct() {
-		return product;
+	public int getProduct_id() {
+		return product_id;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
 	}
 }

@@ -1,17 +1,54 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
+@Entity(foreignKeys = {
+		@ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id"),
+		@ForeignKey(entity = LendingPartner.class, parentColumns = "id", childColumns = "lending_partner_id"),
+		@ForeignKey(entity = InstallmentProductContract.class, parentColumns = "id", childColumns = "installment_product_contract_id")})
 public class Payment {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String name;
 	private String des;
-	private Employee e;
+	private int customer_id;
+	private int lending_partner_id;
+	private int installment_product_contract_id;
 
-	public Payment(int id, String name, String des, Employee e) {
-		this.id = id;
+
+	public Payment(String name, String des, int customer_id, int lending_partner_id, int installment_product_contract_id) {
 		this.name = name;
 		this.des = des;
-		this.e = e;
+		this.customer_id = customer_id;
+		this.lending_partner_id = lending_partner_id;
+		this.installment_product_contract_id = installment_product_contract_id;
+	}
+
+	public int getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public int getLending_partner_id() {
+		return lending_partner_id;
+	}
+
+	public void setLending_partner_id(int lending_partner_id) {
+		this.lending_partner_id = lending_partner_id;
+	}
+
+	public int getInstallment_product_contract_id() {
+		return installment_product_contract_id;
+	}
+
+	public void setInstallment_product_contract_id(int installment_product_contract_id) {
+		this.installment_product_contract_id = installment_product_contract_id;
 	}
 
 	public int getId() {
@@ -38,11 +75,4 @@ public class Payment {
 		this.des = des;
 	}
 
-	public Employee getE() {
-		return e;
-	}
-
-	public void setE(Employee e) {
-		this.e = e;
-	}
 }

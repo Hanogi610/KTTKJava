@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
+    implementation ("androidx.room:room-runtime:2.4.2")
+    annotationProcessor ("androidx.room:room-compiler:2.4.2")
     implementation ("mysql:mysql-connector-java:8.0.33")
     implementation ("com.google.android.material:material:1.4.0")
     androidTestImplementation(libs.ext.junit)

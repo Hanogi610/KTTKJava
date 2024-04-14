@@ -1,23 +1,27 @@
 package com.example.kttkjava.activity;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.controller.AppDatabase;
+import com.example.kttkjava.controller.AppDatabaseCallback;
 import com.example.kttkjava.model.Supplier;
-import com.example.kttkjava.controller.SupplierDAO;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static AppDatabase instance;
     private Button supplierManagementButton;
 
     @Override
@@ -30,28 +34,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        instance = getInstance(this);
         supplierManagementButton = findViewById(R.id.supplier);
-
-        // Create an instance of SupplierDAO
-        SupplierDAO supplierDAO = new SupplierDAO();
-
-        supplierManagementButton.setOnClickListener(v -> {
-            new LoadSuppliersTask().execute("Sea");
-        });
     }
 
-    private class LoadSuppliersTask extends AsyncTask<String, Void, ArrayList<Supplier>> {
-        @Override
-        protected ArrayList<Supplier> doInBackground(String... strings) {
-            return new SupplierDAO().getAllSuppliers();
+    public static synchronized AppDatabase getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, "BNPL_database")
+                    .addCallback(new AppDatabaseCallback(context.getApplicationContext()))
+                    .build();
         }
-
-        @Override
-        protected void onPostExecute(ArrayList<Supplier> suppliers) {
-            super.onPostExecute(suppliers);
-            // Update UI on main thread
-            Log.d("MainActivity", "Suppliers: " + suppliers.size());
-        }
+        return instance;
     }
+
 }

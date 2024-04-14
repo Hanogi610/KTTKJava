@@ -6,7 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".activity.PurchaseInvoice">
+    tools:context=".activity.Shipping">
+
+    <EditText
+        android:id="@+id/shipping_address_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Shipping Address"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/product_quantity_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product - Quantity"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/shipping_address_edittext"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/supplier_textview"
@@ -15,37 +36,7 @@
         android:text="Supplier"
         android:textSize="18sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/address_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Address"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/supplier_textview"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/total_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/address_textview"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/product_amount_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product - Amount"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/total_textview"
+        app:layout_constraintTop_toBottomOf="@+id/product_quantity_textview"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -56,7 +47,7 @@
         android:textColor="#FFFFFF"
         android:backgroundTint="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_amount_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/supplier_textview" />
 
     <Button
         android:id="@+id/cancel_button"
@@ -66,6 +57,6 @@
         android:textColor="#FFFFFF"
         android:backgroundTint="#F44336"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_amount_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/supplier_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

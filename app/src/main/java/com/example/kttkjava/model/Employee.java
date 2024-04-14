@@ -1,19 +1,31 @@
 package com.example.kttkjava.model;
 
+
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(foreignKeys = @ForeignKey(entity = Account.class,
+		parentColumns = "id",
+		childColumns = "account_id",
+		onDelete = ForeignKey.CASCADE))
 public class Employee extends Person {
+
 
 	private String position;
 	private float salary;
-	private Account account;
+	private int account_id;
 
-	public Employee(int id, Date dob, String gender, Name name, Address address, String position, float salary, Account account) {
-		super(id,dob,gender,name,address);
+
+	public Employee(int id, String dob, String gender, int name_id, int address_id, String position, float salary, int account_id) {
+		super(id, dob, gender, name_id, address_id);
 		this.position = position;
 		this.salary = salary;
-		this.account = account;
+		this.account_id = account_id;
 	}
+
 
 	public String getPosition() {
 		return position;
@@ -31,11 +43,11 @@ public class Employee extends Person {
 		this.salary = salary;
 	}
 
-	public Account getAccount() {
-		return account;
+	public int getAccount_id() {
+		return account_id;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
 	}
 }

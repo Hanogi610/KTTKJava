@@ -1,7 +1,12 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Supplier {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String name;
 	private String des;
@@ -9,8 +14,8 @@ public class Supplier {
 	private String phone;
 	private String email;
 
-	public Supplier(int id, String name, String des, String address, String phone, String email) {
-		this.id = id;
+
+	public Supplier(String name, String des, String address, String phone, String email) {
 		this.name = name;
 		this.des = des;
 		this.address = address;

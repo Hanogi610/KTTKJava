@@ -1,14 +1,19 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Name {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 
-	public Name(int id, String firstName, String middleName, String lastName) {
-		this.id = id;
+
+	public Name(String firstName, String middleName, String lastName) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;

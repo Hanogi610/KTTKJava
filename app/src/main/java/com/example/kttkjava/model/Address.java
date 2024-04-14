@@ -1,7 +1,12 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Address {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String street;
 	private String district;
@@ -9,8 +14,7 @@ public class Address {
 	private String province;
 	private String country;
 
-	public Address(int id, String street, String district, String city, String province, String country) {
-		this.id = id;
+	public Address(String street, String district, String city, String province, String country) {
 		this.street = street;
 		this.district = district;
 		this.city = city;

@@ -1,6 +1,9 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+
 import java.util.Date;
+@Entity
 
 public class Customer extends Person {
 
@@ -10,14 +13,15 @@ public class Customer extends Person {
 	private double totalRemaining;
 	private int totalContract;
 
-	public Customer(int id, Date dob, String gender, Name name, Address address, String job, String workPlace, double totalAmount, double totalRemaining, int totalContract) {
-		super(id,dob,gender,name,address); // Call to the Person constructor
+	public Customer(int id, String dob, String gender, int name_id, int address_id, String job, String workPlace, double totalAmount, double totalRemaining, int totalContract) {
+		super(id, dob, gender, name_id, address_id);
 		this.job = job;
 		this.workPlace = workPlace;
 		this.totalAmount = totalAmount;
 		this.totalRemaining = totalRemaining;
 		this.totalContract = totalContract;
 	}
+
 
 	public String getJob() {
 		return job;

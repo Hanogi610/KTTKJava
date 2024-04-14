@@ -1,14 +1,19 @@
 package com.example.kttkjava.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Product {
 
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private String name;
 	private String des;
 	private float buyPrice;
 
-	public Product(int id, String name, String des, float buyPrice) {
-		this.id = id;
+
+	public Product(String name, String des, float buyPrice) {
 		this.name = name;
 		this.des = des;
 		this.buyPrice = buyPrice;
