@@ -15,13 +15,15 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.kttkjava.R;
 import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.PurchaseProduct;
+import com.example.kttkjava.model.Supplier;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ProductImport extends AppCompatActivity {
     private TextInputEditText quantity;
     private Button checkOutButton, cancelButton;
     private TextView supplierName, productName;
-    public static Product product;
+    private Product product;
+    private Supplier supplier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,9 @@ public class ProductImport extends AppCompatActivity {
         productName = findViewById(R.id.product_name);
         Intent intent = getIntent();
         product = (Product) intent.getSerializableExtra("product");
+        supplier = (Supplier) intent.getSerializableExtra("supplier");
         productName.setText(product.getName());
-        supplierName.setText(ProductSearch.purchaseSuppplier.getName());
+        supplierName.setText(supplier.getName());
     }
     private void setup() {
         checkOutButton.setOnClickListener(v -> {
@@ -79,6 +82,8 @@ public class ProductImport extends AppCompatActivity {
         protected void onPostExecute(PurchaseProduct purchaseProduct) {
             Intent intent = new Intent(ProductImport.this,Shipping.class);
             intent.putExtra("purchaseProduct",purchaseProduct);
+            intent.putExtra("supplier",supplier);
+            intent.putExtra("product",product);
             startActivity(intent);
         }
     }

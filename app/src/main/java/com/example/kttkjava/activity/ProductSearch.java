@@ -30,7 +30,7 @@ public class ProductSearch extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private RecyclerView productRecyclerView;
     private List<Product> products;
-    public static Supplier purchaseSuppplier;
+    private Supplier purchaseSuppplier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class ProductSearch extends AppCompatActivity {
         returnButton = findViewById(R.id.return_button);
         productRecyclerView = findViewById(R.id.product_list);
         products = new ArrayList<>();
-        productAdapter = new ProductAdapter(products, this);
+        productAdapter = new ProductAdapter(products, purchaseSuppplier,this);
         productRecyclerView.setAdapter(productAdapter);
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

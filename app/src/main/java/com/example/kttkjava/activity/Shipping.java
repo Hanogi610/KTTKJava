@@ -14,16 +14,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.kttkjava.R;
 import com.example.kttkjava.controller.ShipmentDAO;
+import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.PurchaseInvoice;
 import com.example.kttkjava.model.PurchaseProduct;
 import com.example.kttkjava.model.Shipment;
+import com.example.kttkjava.model.Supplier;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class Shipping extends AppCompatActivity {
     private TextInputEditText shippingAddress;
     private TextView product, quantity, supplier;
     private Button confirmButton, cancelButton;
-    public static PurchaseProduct purchaseProduct;
+    private PurchaseProduct purchaseProduct;
+    private Product productObject;
+    private Supplier supplierObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,11 @@ public class Shipping extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancel_button);
         Intent intent = getIntent();
         purchaseProduct = (PurchaseProduct) intent.getSerializableExtra("purchaseProduct");
-        product.setText(ProductImport.product.getName());
+        productObject = (Product) intent.getSerializableExtra("product");
+        supplierObject = (Supplier) intent.getSerializableExtra("supplier");
+        product.setText(productObject.getName());
         quantity.setText(String.valueOf(purchaseProduct.getQuantity()));
-        supplier.setText(ProductSearch.purchaseSuppplier.getName());
+        supplier.setText(supplierObject.getName());
     }
     private void setup() {
         confirmButton.setOnClickListener(v -> {
@@ -59,7 +65,7 @@ public class Shipping extends AppCompatActivity {
             if (shippingAddressString.isEmpty()) {
                 return;
             }
-            Shipment shipment = new Shipment(ProductImport.product.getName(), shippingAddressString);
+            Shipment shipment = new Shipment(productObject.getName(), shippingAddressString);
             new addShipment().execute(shipment);
 
         });
@@ -79,6 +85,9 @@ public class Shipping extends AppCompatActivity {
         protected void onPostExecute(Shipment shipment) {
             Intent intent = new Intent(Shipping.this, PurchaseInvoiceActivity.class);
             intent.putExtra("shipment",shipment);
+            intent.putExtra("purchaseProduct",purchaseProduct);
+            intent.putExtra("product",productObject);
+            intent.putExtra("supplier",supplierObject);
             startActivity(intent);
         }
     }

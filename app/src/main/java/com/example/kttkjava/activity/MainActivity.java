@@ -1,8 +1,6 @@
 package com.example.kttkjava.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,14 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.room.Room;
 
 import com.example.kttkjava.R;
 import com.example.kttkjava.controller.AppDatabase;
-import com.example.kttkjava.controller.AppDatabaseCallback;
-import com.example.kttkjava.model.Supplier;
-
-import java.util.ArrayList;
+import com.example.kttkjava.controller.InitializeDatabaseTask;
 
 public class MainActivity extends AppCompatActivity {
     public static AppDatabase instance;
@@ -36,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         initializeDatabase();
-//        Supplier a = new Supplier("supplier a","supllier a","hn vn","0","ss@gmail.com");
-//        new insertSupplier().execute(a);
         supplierManagementButton = findViewById(R.id.supplier);
         importProductButton = findViewById(R.id.import_product);
         statisticButton = findViewById(R.id.lpstatistic);
@@ -56,17 +48,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    class insertSupplier extends AsyncTask<Supplier,Void, Void>{
-//        @Override
-//        protected Void doInBackground(Supplier... notes) {
-//            instance.supplierDAO().insert(notes[0]);
-//
-//            return null;
-//        }
-//    }
     private void initializeDatabase() {
         try {
             instance = AppDatabase.getInstance(this);
+            //new InitializeDatabaseTask(this).execute();
         } catch (Exception e) {
             e.printStackTrace();
             // Handle the initialization failure, e.g., show an error message

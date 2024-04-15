@@ -18,11 +18,14 @@ public class Payment {
 	private int lending_partner_id;
 	private int installment_product_contract_id;
 
+	private float amount;
 
-	public Payment(String name, String des, int customer_id, int lending_partner_id, int installment_product_contract_id) {
+
+	public Payment(String name, String des, int customer_id, int lending_partner_id, int installment_product_contract_id, float amount) {
 		this.name = name;
 		this.des = des;
 		this.customer_id = customer_id;
+		this.amount = amount;
 		this.lending_partner_id = lending_partner_id;
 		this.installment_product_contract_id = installment_product_contract_id;
 	}
@@ -75,4 +78,11 @@ public class Payment {
 		this.des = des;
 	}
 
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
 }

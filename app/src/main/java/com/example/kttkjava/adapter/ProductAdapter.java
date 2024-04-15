@@ -13,16 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kttkjava.R;
 import com.example.kttkjava.activity.ProductImport;
 import com.example.kttkjava.model.Product;
+import com.example.kttkjava.model.Supplier;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     private List<Product> productList;
     private Context context;
+    private Supplier purchaseSupplier;
 
-    public ProductAdapter(List<Product> productList, Context context) {
+    public ProductAdapter(List<Product> productList,Supplier purchaseSupplier, Context context) {
         this.productList = productList;
         this.context = context;
+        this.purchaseSupplier = purchaseSupplier;
     }
 
     @NonNull
@@ -41,6 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductImport.class);
             intent.putExtra("product", product);
+            intent.putExtra("supplier", purchaseSupplier);
             context.startActivity(intent);
         });
     }
