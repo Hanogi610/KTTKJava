@@ -22,7 +22,7 @@ import com.example.kttkjava.model.Supplier;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private static AppDatabase instance;
+    public static AppDatabase instance;
     private Button supplierManagementButton,importProductButton, statisticButton;
 
     @Override

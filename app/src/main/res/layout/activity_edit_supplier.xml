@@ -7,54 +7,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AddNewSupplier"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_supplier_name"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/supplier_name" />
-    <EditText
+        android:padding="5sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_supplier_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="5sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_supplier_address"
-        android:hint="@string/supplier_address" />
-    <EditText
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_supplier_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_address" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="5sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_supplier_phone"
-        android:hint="@string/supplier_phone" />
-    <EditText
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_supplier_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="5sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_supplier_email"
-        android:hint="@string/supplier_email" />
-    <EditText
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_supplier_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_email" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="5sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_supplier_des"
-        android:hint="@string/supplier_description" />
-    <LinearLayout
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_supplier_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_description" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
+
         <Button
-            android:id="@+id/update_button"
+            android:id="@+id/edit_update_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/update" />
+            android:text="@string/update"
+            android:layout_marginLeft="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
+            android:id="@+id/edit_reset_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reset"
-            android:id="@+id/edit_reset_button" />
+            app:layout_constraintEnd_toStartOf="@+id/edit_cancel_button"
+            app:layout_constraintStart_toEndOf="@+id/update_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
+            android:id="@+id/edit_cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_cancel_button"
-            android:text="@string/cancel" />
-    </LinearLayout>
+            android:text="@string/cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="10sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

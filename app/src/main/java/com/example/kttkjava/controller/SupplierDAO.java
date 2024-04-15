@@ -13,6 +13,9 @@ public interface SupplierDAO {
     void insert(Supplier supplier);
     @Update
     void update(Supplier supplier);
-    @Query("SELECT * FROM Supplier WHERE name LIKE :name")
-    Supplier[] getSupplierById(String name);
+    @Query("SELECT * FROM Supplier WHERE name LIKE '%' || :name || '%'")
+    Supplier[] getSupplierByName(String name);
+
+    @Query("SELECT * FROM Supplier")
+    Supplier[] getAllSuppliers();
 }

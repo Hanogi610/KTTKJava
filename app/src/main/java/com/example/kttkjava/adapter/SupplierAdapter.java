@@ -1,6 +1,7 @@
 package com.example.kttkjava.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.activity.EditSupplier;
 import com.example.kttkjava.model.Supplier;
 
 import java.util.List;
@@ -36,13 +38,19 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierViewHolder> {
         Supplier supplier = supplierList.get(position);
         holder.supplierName.setText(supplier.getName());
         holder.editButton.setOnClickListener(v -> {
-            // Handle edit button click event
+            Intent intent = new Intent(context, EditSupplier.class);
+            intent.putExtra("supplier", supplier);
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
         return supplierList.size();
+    }
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.supplierList = suppliers;
+        notifyDataSetChanged();
     }
 }
 class SupplierViewHolder extends RecyclerView.ViewHolder {
