@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 import com.example.kttkjava.model.Address;
 import com.example.kttkjava.model.Name;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(foreignKeys = {
@@ -18,7 +19,7 @@ import java.util.Date;
 				childColumns = "address_id",
 				onDelete = ForeignKey.CASCADE)
 })
-public class Person {
+public class Person implements Serializable {
 	@PrimaryKey
 	private int id;
 	private String dob;

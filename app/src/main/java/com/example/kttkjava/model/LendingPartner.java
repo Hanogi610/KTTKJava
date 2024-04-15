@@ -3,10 +3,11 @@ package com.example.kttkjava.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "lending_partner")
-public class LendingPartner extends Person {
+public class LendingPartner extends Person implements Serializable {
 
 	private String companyName;
 

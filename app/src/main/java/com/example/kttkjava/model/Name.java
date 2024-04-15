@@ -3,8 +3,10 @@ package com.example.kttkjava.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Name {
+public class Name implements Serializable {
 
 	@PrimaryKey(autoGenerate = true)
 	private int id;

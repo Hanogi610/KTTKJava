@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".activity.Statistic">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:fabSize="normal" />
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
