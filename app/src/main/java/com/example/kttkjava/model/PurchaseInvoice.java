@@ -4,9 +4,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity(tableName = "purchase_invoice",foreignKeys = {
 		@ForeignKey(entity = PurchaseProduct.class, parentColumns = "id", childColumns = "purchase_product_id"),
 		@ForeignKey(entity = Supplier.class, parentColumns = "id", childColumns = "supplier_id"),

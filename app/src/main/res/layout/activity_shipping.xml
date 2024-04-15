@@ -8,27 +8,44 @@
     android:padding="16dp"
     tools:context=".activity.Shipping">
 
-    <EditText
-        android:id="@+id/shipping_address_edittext"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/shipping_address_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shipping Address"
-        android:textSize="18sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/shipping_address_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Shipping Address"
+            android:textSize="18sp"
+            android:textColor="#000000" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/product_quantity_textview"
-        android:layout_width="match_parent"
+        android:id="@+id/product_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product - Quantity"
+        android:text="Product"
         android:textSize="18sp"
         android:padding="5sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/shipping_address_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/shipping_address_layout"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/quantity_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:text="Quantity"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shipping_address_layout" />
 
     <TextView
         android:id="@+id/supplier_textview"
@@ -38,7 +55,7 @@
         android:textSize="18sp"
         android:padding="5sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/product_quantity_textview"
+        app:layout_constraintTop_toBottomOf="@+id/product_textview"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

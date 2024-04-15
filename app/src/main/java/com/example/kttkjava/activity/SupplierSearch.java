@@ -3,7 +3,6 @@ package com.example.kttkjava.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,36 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
 import com.example.kttkjava.adapter.SupplierAdapter;
+import com.example.kttkjava.adapter.SupplierSearchAdapter;
 import com.example.kttkjava.model.Supplier;
-import com.example.kttkjava.repository.SupplierRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SupplierManagement extends AppCompatActivity {
+public class SupplierSearch extends AppCompatActivity {
     private RecyclerView supplierRecyclerView;
     private MaterialButton searchButton,addNewSupplierButton;
     private TextInputEditText searchInput;
-    private SupplierAdapter supplierAdapter;
+    private SupplierSearchAdapter supplierAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_supplier_management);
+        setContentView(R.layout.activity_supplier_search);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         init();
         setup();
-
     }
 
     private void setup() {
@@ -53,16 +49,17 @@ public class SupplierManagement extends AppCompatActivity {
             new FetchSupplierByNameTask().execute(searchInput);
         });
         addNewSupplierButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SupplierManagement.this, AddNewSupplier.class);
+            // Start the AddSupplier activity
+            Intent intent = new Intent(this, AddNewSupplier.class);
             startActivity(intent);
         });
     }
 
     private void init(){
-        supplierRecyclerView = findViewById(R.id.supplier_list);
+        searchInput = findViewById(R.id.search_supplier_text);
         searchButton = findViewById(R.id.search_button);
         addNewSupplierButton = findViewById(R.id.add_new_supllier_button);
-        searchInput = findViewById(R.id.search_supplier_text);
+        supplierRecyclerView = findViewById(R.id.supplier_list);
         new FetchSuppliersTask().execute();
     }
     private class FetchSuppliersTask extends AsyncTask<Void, Void, List<Supplier>> {
@@ -73,9 +70,9 @@ public class SupplierManagement extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Supplier> suppliers) {
-            supplierAdapter = new SupplierAdapter(suppliers, SupplierManagement.this);
+            supplierAdapter = new SupplierSearchAdapter(suppliers, SupplierSearch.this);
             supplierRecyclerView.setAdapter(supplierAdapter);
-            supplierRecyclerView.setLayoutManager(new LinearLayoutManager(SupplierManagement.this));
+            supplierRecyclerView.setLayoutManager(new LinearLayoutManager(SupplierSearch.this));
         }
     }
 

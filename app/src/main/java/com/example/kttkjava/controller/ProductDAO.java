@@ -11,8 +11,8 @@ public interface ProductDAO {
     @Insert
     void insert(Product product);
 
-    @Query("SELECT * FROM product WHERE name = :name")
-    Product getProductById(String name);
+    @Query("SELECT * FROM product WHERE name LIKE '%' || :name || '%'")
+    Product[] getProductByName(String name);
 
     @Query("SELECT * FROM product")
     Product[] getAllProducts();

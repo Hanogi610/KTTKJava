@@ -16,6 +16,9 @@
         android:theme="@style/Theme.KTTKJava"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SupplierSearch"
+            android:exported="false" />
+        <activity
             android:name=".activity.LendingPartnerDetail"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             android:name=".activity.Statistic"
             android:exported="false" />
         <activity
-            android:name=".activity.PurchaseInvoice"
+            android:name=".activity.PurchaseInvoiceActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ProductImport"

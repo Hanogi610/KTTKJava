@@ -1,6 +1,7 @@
 package com.example.kttkjava.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.activity.ProductImport;
 import com.example.kttkjava.model.Product;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     private List<Product> productList;
     private Context context;
 
@@ -34,7 +36,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText((int) product.getBuyPrice());
+        holder.productPrice.setText(String.valueOf(product.getBuyPrice()));
+        // Set OnClickListener for the entire item view
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ProductImport.class);
+            intent.putExtra("product", product);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -46,12 +54,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.productList = products;
         notifyDataSetChanged();
 }
-    class ProductViewHolder extends RecyclerView.ViewHolder{
-        TextView productName, productPrice;
-        public ProductViewHolder(@NonNull View itemView) {
-            super(itemView);
-            productName = itemView.findViewById(R.id.product_name);
-            productPrice = itemView.findViewById(R.id.product_price);
-        }
+
+}
+class ProductViewHolder extends RecyclerView.ViewHolder{
+    TextView productName, productPrice;
+    public ProductViewHolder(@NonNull View itemView) {
+        super(itemView);
+        productName = itemView.findViewById(R.id.product_name);
+        productPrice = itemView.findViewById(R.id.product_price);
     }
 }

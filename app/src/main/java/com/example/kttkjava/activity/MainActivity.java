@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        instance = AppDatabase.getInstance(this);
+        initializeDatabase();
 //        Supplier a = new Supplier("supplier a","supllier a","hn vn","0","ss@gmail.com");
 //        new insertSupplier().execute(a);
         supplierManagementButton = findViewById(R.id.supplier);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         importProductButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SupplierManagement.class);
+            Intent intent = new Intent(MainActivity.this, SupplierSearch.class);
             startActivity(intent);
         });
         statisticButton.setOnClickListener(v -> {
@@ -64,4 +64,13 @@ public class MainActivity extends AppCompatActivity {
 //            return null;
 //        }
 //    }
+    private void initializeDatabase() {
+        try {
+            instance = AppDatabase.getInstance(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle the initialization failure, e.g., show an error message
+            Toast.makeText(this, "Failed to initialize database", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

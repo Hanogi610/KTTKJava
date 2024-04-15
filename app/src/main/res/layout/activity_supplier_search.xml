@@ -5,14 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".activity.ProductSearch">
+    tools:context=".activity.SupplierSearch">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/product_name_input"
+        android:id="@+id/supplier_to_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/product"
+        android:hint="@string/supplier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,44 +19,33 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/search_product_name"/>
+            android:id="@+id/search_supplier_text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/return_button"
+        android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_name_input" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/product_search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
         android:text="@string/search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_name_input" />
+        app:layout_constraintTop_toBottomOf="@+id/supplier_to_search_input" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_new_product_button"
+        android:id="@+id/add_new_supllier_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_product"
-        app:layout_constraintEnd_toStartOf="@+id/return_button"
-        app:layout_constraintStart_toEndOf="@+id/product_search_button"
-        app:layout_constraintTop_toBottomOf="@+id/product_name_input" />
+        android:text="@string/add_new_supllier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search_button"
+        app:layout_constraintTop_toBottomOf="@+id/supplier_to_search_input" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/product_list"
+        android:id="@+id/supplier_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_search_button"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/search_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
