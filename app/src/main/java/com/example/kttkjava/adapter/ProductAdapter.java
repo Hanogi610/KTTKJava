@@ -21,6 +21,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     private List<Product> productList;
     private Context context;
     private Supplier purchaseSupplier;
+    private onItemClickListener listener;
 
     public ProductAdapter(List<Product> productList,Supplier purchaseSupplier, Context context) {
         this.productList = productList;
@@ -42,10 +43,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         holder.productPrice.setText(String.valueOf(product.getBuyPrice()));
         // Set OnClickListener for the entire item view
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ProductImport.class);
-            intent.putExtra("product", product);
-            intent.putExtra("supplier", purchaseSupplier);
-            context.startActivity(intent);
+            if(listener != null) {
+                listener.onItemClick(position);
+            }
         });
     }
 
@@ -57,7 +57,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     public void setProducts(List<Product> products) {
         this.productList = products;
         notifyDataSetChanged();
-}
+    }
+
+    public interface onItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener) {
+        this.listener = listener;
+    }
 
 }
 class ProductViewHolder extends RecyclerView.ViewHolder{

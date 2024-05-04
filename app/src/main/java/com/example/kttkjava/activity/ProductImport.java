@@ -13,10 +13,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.model.ChosenProduct;
 import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.PurchaseProduct;
 import com.example.kttkjava.model.Supplier;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 public class ProductImport extends AppCompatActivity {
     private TextInputEditText quantity;
@@ -24,6 +27,7 @@ public class ProductImport extends AppCompatActivity {
     private TextView supplierName, productName;
     private Product product;
     private Supplier supplier;
+    private ArrayList<ChosenProduct> chosenProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class ProductImport extends AppCompatActivity {
         Intent intent = getIntent();
         product = (Product) intent.getSerializableExtra("product");
         supplier = (Supplier) intent.getSerializableExtra("supplier");
+        chosenProducts = (ArrayList<ChosenProduct>) intent.getSerializableExtra("chosen products");
         productName.setText(product.getName());
         supplierName.setText(supplier.getName());
     }
@@ -62,29 +67,19 @@ public class ProductImport extends AppCompatActivity {
             if (quantity <= 0) {
                 return;
             }
-            PurchaseProduct purchaseProduct = new PurchaseProduct(product.getId(),quantity,product.getBuyPrice()*quantity);
-            new addPurchaseProduct().execute(purchaseProduct);
+
+            ChosenProduct chosenProduct = new ChosenProduct(product.getId(),product.getName(),product.getDes(),product.getBuyPrice(),quantity,product.getBuyPrice()*quantity);
+            if (chosenProducts == null) {
+                chosenProducts = new ArrayList<>();
+            }
+            chosenProducts.add(chosenProduct);
+            Intent intent = new Intent(this, ProductSearch.class);
+            intent.putExtra("supplier",supplier);
+            intent.putExtra("chosen products",chosenProducts);
+            startActivity(intent);
         });
         cancelButton.setOnClickListener(v -> {
             finish();
         });
-    }
-    private class addPurchaseProduct extends AsyncTask<PurchaseProduct, Void, PurchaseProduct> {
-
-        @Override
-        protected PurchaseProduct doInBackground(PurchaseProduct... purchaseProducts) {
-            long id = MainActivity.instance.purchaseProductDAO().insert(purchaseProducts[0]);
-            PurchaseProduct inserted = MainActivity.instance.purchaseProductDAO().getPurchaseProductById(id);
-            return inserted;
-        }
-
-        @Override
-        protected void onPostExecute(PurchaseProduct purchaseProduct) {
-            Intent intent = new Intent(ProductImport.this,Shipping.class);
-            intent.putExtra("purchaseProduct",purchaseProduct);
-            intent.putExtra("supplier",supplier);
-            intent.putExtra("product",product);
-            startActivity(intent);
-        }
     }
 }

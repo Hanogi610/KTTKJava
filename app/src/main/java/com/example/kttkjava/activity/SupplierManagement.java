@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
 import com.example.kttkjava.adapter.SupplierAdapter;
+import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Supplier;
 import com.example.kttkjava.repository.SupplierRepository;
 import com.google.android.material.button.MaterialButton;
@@ -77,7 +78,7 @@ public class SupplierManagement extends AppCompatActivity {
     private class FetchSuppliersTask extends AsyncTask<Void, Void, List<Supplier>> {
         @Override
         protected List<Supplier> doInBackground(Void... voids) {
-            return Arrays.asList(MainActivity.instance.supplierDAO().getAllSuppliers());
+            return Arrays.asList(AppDatabase.getInstance(getApplicationContext()).supplierDAO().getAllSuppliers());
         }
 
         @Override
@@ -91,7 +92,7 @@ public class SupplierManagement extends AppCompatActivity {
     private class FetchSupplierByNameTask extends AsyncTask<String, Void, List<Supplier>> {
         @Override
         protected List<Supplier> doInBackground(String... strings) {
-            List<Supplier> suppliers = Arrays.asList(MainActivity.instance.supplierDAO().getSupplierByName(strings[0]));
+            List<Supplier> suppliers = Arrays.asList(AppDatabase.getInstance(getApplicationContext()).supplierDAO().getSupplierByName(strings[0]));
             return suppliers;
         }
 

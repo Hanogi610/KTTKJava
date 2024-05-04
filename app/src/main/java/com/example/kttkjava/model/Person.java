@@ -9,7 +9,7 @@ import com.example.kttkjava.model.Name;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(foreignKeys = {
+@Entity(tableName = "person",foreignKeys = {
 		@ForeignKey(entity = Name.class,
 				parentColumns = "id",
 				childColumns = "name_id",

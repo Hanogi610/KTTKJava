@@ -14,13 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.adapter.ChosenProductRvAdapter;
 import com.example.kttkjava.adapter.SupplierAdapter;
 import com.example.kttkjava.adapter.SupplierSearchAdapter;
+import com.example.kttkjava.controller.AppDatabase;
+import com.example.kttkjava.model.ChosenProduct;
+import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.Supplier;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,22 +35,21 @@ public class SupplierSearch extends AppCompatActivity {
     private TextInputEditText searchInput;
     private SupplierSearchAdapter supplierAdapter;
 
+    private ArrayList<ChosenProduct> products;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_supplier_search);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        products = new ArrayList<ChosenProduct>();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SupplierSearch.this, MainActivity.class);
+                intent.putExtra("chosen products", products);
                 startActivity(intent);
             }
         });
@@ -63,6 +67,7 @@ public class SupplierSearch extends AppCompatActivity {
             Intent intent = new Intent(this, AddNewSupplier.class);
             startActivity(intent);
         });
+
     }
 
     private void init(){
@@ -70,12 +75,14 @@ public class SupplierSearch extends AppCompatActivity {
         searchButton = findViewById(R.id.search_button);
         addNewSupplierButton = findViewById(R.id.add_new_supllier_button);
         supplierRecyclerView = findViewById(R.id.supplier_list);
+
+
         new FetchSuppliersTask().execute();
     }
     private class FetchSuppliersTask extends AsyncTask<Void, Void, List<Supplier>> {
         @Override
         protected List<Supplier> doInBackground(Void... voids) {
-            return Arrays.asList(MainActivity.instance.supplierDAO().getAllSuppliers());
+            return Arrays.asList(AppDatabase.getInstance(getApplicationContext()).supplierDAO().getAllSuppliers());
         }
 
         @Override
@@ -89,7 +96,7 @@ public class SupplierSearch extends AppCompatActivity {
     private class FetchSupplierByNameTask extends AsyncTask<String, Void, List<Supplier>> {
         @Override
         protected List<Supplier> doInBackground(String... strings) {
-            List<Supplier> suppliers = Arrays.asList(MainActivity.instance.supplierDAO().getSupplierByName(strings[0]));
+            List<Supplier> suppliers = Arrays.asList(AppDatabase.getInstance(getApplicationContext()).supplierDAO().getSupplierByName(strings[0]));
             return suppliers;
         }
 

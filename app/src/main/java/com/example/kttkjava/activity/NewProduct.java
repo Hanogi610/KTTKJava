@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Product;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -69,7 +70,7 @@ public class NewProduct extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Product... products) {
-            MainActivity.instance.productDAO().insert(products[0]);
+            AppDatabase.getInstance(getApplicationContext()).productDAO().insert(products[0]);
             return null;
         }
 

@@ -70,7 +70,7 @@ public class AddNewSupplier extends AppCompatActivity {
         @Override
         protected Void doInBackground(Supplier... suppliers) {
             Supplier supplier = suppliers[0];
-            MainActivity.instance.supplierDAO().insert(supplier);
+            AppDatabase.getInstance(getApplicationContext()).supplierDAO().insert(supplier);
             return null;
         }
         @Override

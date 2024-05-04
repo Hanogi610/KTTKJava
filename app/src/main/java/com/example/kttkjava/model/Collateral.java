@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "collateral",foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id", onDelete = ForeignKey.CASCADE))
 public class Collateral {
 
 	@PrimaryKey(autoGenerate = true)

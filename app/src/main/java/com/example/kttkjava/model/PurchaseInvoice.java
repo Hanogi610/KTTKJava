@@ -5,7 +5,6 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "purchase_invoice",foreignKeys = {
-		@ForeignKey(entity = PurchaseProduct.class, parentColumns = "id", childColumns = "purchase_product_id"),
 		@ForeignKey(entity = Supplier.class, parentColumns = "id", childColumns = "supplier_id"),
 		@ForeignKey(entity = Shipment.class, parentColumns = "id", childColumns = "shipment_id"),
 		@ForeignKey(entity = Employee.class, parentColumns = "id", childColumns = "employee_id")})
@@ -15,16 +14,14 @@ public class PurchaseInvoice {
 	private int id;
 	private float total;
 	private String date;
-	private int purchase_product_id;
 	private int supplier_id;
 	private int shipment_id;
 	private int employee_id;
 
 
-	public PurchaseInvoice(float total, String date, int purchase_product_id, int supplier_id, int shipment_id, int employee_id) {
+	public PurchaseInvoice(float total, String date, int supplier_id, int shipment_id, int employee_id) {
 		this.total = total;
 		this.date = date;
-		this.purchase_product_id = purchase_product_id;
 		this.supplier_id = supplier_id;
 		this.shipment_id = shipment_id;
 		this.employee_id = employee_id;
@@ -70,13 +67,6 @@ public class PurchaseInvoice {
 		this.date = date;
 	}
 
-	public int getPurchase_product_id() {
-		return purchase_product_id;
-	}
-
-	public void setPurchase_product_id(int purchase_product_id) {
-		this.purchase_product_id = purchase_product_id;
-	}
 
 	public int getSupplier_id() {
 		return supplier_id;

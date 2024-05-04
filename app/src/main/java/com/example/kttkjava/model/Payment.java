@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(foreignKeys = {
+@Entity(tableName = "payment",foreignKeys = {
 		@ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id"),
 		@ForeignKey(entity = LendingPartner.class, parentColumns = "id", childColumns = "lending_partner_id"),
 		@ForeignKey(entity = InstallmentProductContract.class, parentColumns = "id", childColumns = "installment_product_contract_id")})

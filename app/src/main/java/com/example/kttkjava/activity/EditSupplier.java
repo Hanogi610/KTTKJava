@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Supplier;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -74,7 +75,7 @@ public class EditSupplier extends AppCompatActivity {
     private class UpdateSupplierTask extends AsyncTask<Supplier,Void,Void> {
         @Override
         protected Void doInBackground(Supplier... suppliers) {
-            MainActivity.instance.supplierDAO().update(suppliers[0]);
+            AppDatabase.getInstance(getApplicationContext()).supplierDAO().update(suppliers[0]);
             return null;
         }
 

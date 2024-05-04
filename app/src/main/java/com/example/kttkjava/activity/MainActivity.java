@@ -16,7 +16,6 @@ import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.controller.InitializeDatabaseTask;
 
 public class MainActivity extends AppCompatActivity {
-    public static AppDatabase instance;
     private Button supplierManagementButton,importProductButton, statisticButton;
 
     @Override
@@ -50,11 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeDatabase() {
         try {
-            instance = AppDatabase.getInstance(this);
-            //new InitializeDatabaseTask(this).execute();
+            new InitializeDatabaseTask(this).execute();
         } catch (Exception e) {
             e.printStackTrace();
-            // Handle the initialization failure, e.g., show an error message
             Toast.makeText(this, "Failed to initialize database", Toast.LENGTH_SHORT).show();
         }
     }

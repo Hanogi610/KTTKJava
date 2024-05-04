@@ -11,9 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.adapter.ChosenProductRvAdapter;
+import com.example.kttkjava.adapter.ChosenProductWORemoveBtnAdapter;
 import com.example.kttkjava.controller.ShipmentDAO;
+import com.example.kttkjava.model.ChosenProduct;
 import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.PurchaseInvoice;
 import com.example.kttkjava.model.PurchaseProduct;
@@ -21,13 +26,16 @@ import com.example.kttkjava.model.Shipment;
 import com.example.kttkjava.model.Supplier;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+
 public class Shipping extends AppCompatActivity {
     private TextInputEditText shippingAddress;
-    private TextView product, quantity, supplier;
+    private TextView  supplier;
     private Button confirmButton, cancelButton;
-    private PurchaseProduct purchaseProduct;
-    private Product productObject;
     private Supplier supplierObject;
+    private ChosenProductWORemoveBtnAdapter chosenProductRvAdapter;
+    private RecyclerView chosenProductRv;
+    private ArrayList<ChosenProduct> chosenProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +54,20 @@ public class Shipping extends AppCompatActivity {
 
     private void init() {
         shippingAddress = findViewById(R.id.shipping_address_edittext);
-        product = findViewById(R.id.product_textview);
-        quantity = findViewById(R.id.quantity_textview);
         supplier = findViewById(R.id.supplier_textview);
         confirmButton = findViewById(R.id.confirm_button);
         cancelButton = findViewById(R.id.cancel_button);
+        chosenProductRv = findViewById(R.id.chosen_product_rv);
+
+
         Intent intent = getIntent();
-        purchaseProduct = (PurchaseProduct) intent.getSerializableExtra("purchaseProduct");
-        productObject = (Product) intent.getSerializableExtra("product");
         supplierObject = (Supplier) intent.getSerializableExtra("supplier");
-        product.setText(productObject.getName());
-        quantity.setText(String.valueOf(purchaseProduct.getQuantity()));
+        chosenProducts = (ArrayList<ChosenProduct>) intent.getSerializableExtra("chosen products");
         supplier.setText(supplierObject.getName());
+
+        chosenProductRvAdapter = new ChosenProductWORemoveBtnAdapter(chosenProducts);
+        chosenProductRv.setAdapter(chosenProductRvAdapter);
+        chosenProductRv.setLayoutManager(new LinearLayoutManager(this));
     }
     private void setup() {
         confirmButton.setOnClickListener(v -> {
@@ -65,30 +75,16 @@ public class Shipping extends AppCompatActivity {
             if (shippingAddressString.isEmpty()) {
                 return;
             }
-            Shipment shipment = new Shipment(productObject.getName(), shippingAddressString);
-            new addShipment().execute(shipment);
+            Shipment shipment = new Shipment(shippingAddressString, String.valueOf(chosenProducts.size())+" products");
+            Intent intent = new Intent(Shipping.this, PurchaseInvoiceActivity.class);
+            intent.putExtra("shipment",shipment);
+            intent.putExtra("supplier",supplierObject);
+            intent.putExtra("chosen products",chosenProducts);
+            startActivity(intent);
 
         });
         cancelButton.setOnClickListener(v -> {
             finish();
         });
-    }
-    private class addShipment extends AsyncTask<Shipment, Void, Shipment> {
-
-        @Override
-        protected Shipment doInBackground(Shipment... shipments) {
-            long id = MainActivity.instance.shipmentDAO().insert(shipments[0]);
-            return MainActivity.instance.shipmentDAO().getShipmentById(id);
-        }
-
-        @Override
-        protected void onPostExecute(Shipment shipment) {
-            Intent intent = new Intent(Shipping.this, PurchaseInvoiceActivity.class);
-            intent.putExtra("shipment",shipment);
-            intent.putExtra("purchaseProduct",purchaseProduct);
-            intent.putExtra("product",productObject);
-            intent.putExtra("supplier",supplierObject);
-            startActivity(intent);
-        }
     }
 }

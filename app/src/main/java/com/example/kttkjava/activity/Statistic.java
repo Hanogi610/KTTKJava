@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
 import com.example.kttkjava.adapter.LendingPartnerAdapter;
+import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.LPStatistic;
 import com.example.kttkjava.model.LendingPartner;
 import com.example.kttkjava.model.Name;
@@ -59,18 +60,16 @@ public class Statistic extends AppCompatActivity {
     private class initialize extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            lendingPartnerList = Arrays.asList(MainActivity.instance.lendingPartnerDAO().getAllLendingPartners());
+            lendingPartnerList = Arrays.asList(AppDatabase.getInstance(getApplicationContext()).lendingPartnerDAO().getAllLendingPartners());
+            Payment[] lpPayment = AppDatabase.getInstance(getApplicationContext()).paymentDAO().getAll();
             for(LendingPartner lendingPartner : lendingPartnerList) {
-                List<Payment> lpPayment = Arrays.asList(MainActivity.instance.paymentDAO().getPaymentOfLendingPartnerById(lendingPartner.getId()));
                 float revenue = 0;
-                if(lpPayment != null) {
-                    for(Payment payment : lpPayment) {
-                        if(payment != null) {
-                            revenue += payment.getAmount();
-                        }
+                for(Payment payment : lpPayment) {
+                    if(payment.getLending_partner_id() == lendingPartner.getId()) {
+                        revenue += payment.getAmount();
                     }
                 }
-                Name name = MainActivity.instance.nameDao().getNameById(lendingPartner.getName_id());
+                Name name = AppDatabase.getInstance(getApplicationContext()).nameDao().getNameById(lendingPartner.getName_id());
                 String nameString = name.getFirstName() + " " + name.getLastName() + " - " + lendingPartner.getCompanyName();
                 lpStatisticList.add(new LPStatistic(nameString , revenue, lendingPartner));
             }
@@ -79,7 +78,7 @@ public class Statistic extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Collections.sort(lpStatisticList, (LPStatistic lp1, LPStatistic lp2) -> Float.compare(lp2.getRevenue(), lp1.getRevenue()));
+            lpStatisticList.sort((LPStatistic lp1, LPStatistic lp2) -> Float.compare(lp2.getRevenue(), lp1.getRevenue()));
             LendingPartnerAdapter lendingPartnerAdapter = new LendingPartnerAdapter(lpStatisticList);
             recyclerView.setAdapter(lendingPartnerAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(Statistic.this));

@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 @Entity(tableName = "purchase_product",
 		foreignKeys = {
-				@ForeignKey(entity = Product.class, parentColumns = "id", childColumns = "product_id")
+				@ForeignKey(entity = Product.class, parentColumns = "id", childColumns = "product_id"),
+				@ForeignKey(entity = PurchaseInvoice.class, parentColumns = "id", childColumns = "purchase_invoice_id")
 		},
 		indices = {@Index(value = "id", unique = true)}
 )
@@ -21,12 +22,14 @@ public class PurchaseProduct implements Serializable {
 	private int product_id;
 	private int quantity;
 	private float cost;
+	private int purchase_invoice_id;
 
 
-	public PurchaseProduct(int product_id, int quantity, float cost) {
+	public PurchaseProduct(int product_id, int quantity, float cost, int purchase_invoice_id) {
 		this.product_id = product_id;
 		this.quantity = quantity;
 		this.cost = cost;
+		this.purchase_invoice_id = purchase_invoice_id;
 	}
 
 	public int getId() {
@@ -59,5 +62,13 @@ public class PurchaseProduct implements Serializable {
 
 	public void setCost(float cost) {
 		this.cost = cost;
+	}
+
+	public int getPurchase_invoice_id() {
+		return purchase_invoice_id;
+	}
+
+	public void setPurchase_invoice_id(int purchase_invoice_id) {
+		this.purchase_invoice_id = purchase_invoice_id;
 	}
 }

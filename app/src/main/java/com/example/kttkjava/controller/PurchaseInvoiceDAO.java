@@ -8,6 +8,6 @@ import com.example.kttkjava.model.PurchaseInvoice;
 @Dao
 public interface PurchaseInvoiceDAO {
     @Insert
-    void insert(PurchaseInvoice purchaseInvoice);
+    long insert(PurchaseInvoice purchaseInvoice);
 
 }

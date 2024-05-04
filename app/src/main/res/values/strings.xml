@@ -33,6 +33,7 @@
     <string name="address">Address</string>
     <string name="statistic_name">lending partner name</string>
     <string name="detail">Detail</string>
+    <string name="chosen_product">Chosen Product</string>
     <array name="payment_methods">
         <item>Cash</item>
         <item>Bank transfer</item>

@@ -17,4 +17,7 @@ public interface PaymentDAO {
 
     @Query("SELECT * FROM payment WHERE lending_partner_id = :id")
     Payment getPaymentOfLendingPartnerById(int id);
+
+    @Query("Delete FROM payment WHERE id = :id")
+    void deletePayment(int id);
 }

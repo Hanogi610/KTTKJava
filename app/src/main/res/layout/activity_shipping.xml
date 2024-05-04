@@ -25,27 +25,13 @@
             android:textColor="#000000" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/product_textview"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product"
-        android:textSize="18sp"
-        android:padding="5sp"
-        android:textColor="#000000"
+        android:id="@+id/chosen_product_rv"
         app:layout_constraintTop_toBottomOf="@+id/shipping_address_layout"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/quantity_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5sp"
-        android:text="Quantity"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shipping_address_layout" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/supplier_textview"
@@ -55,7 +41,7 @@
         android:textSize="18sp"
         android:padding="5sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/product_textview"
+        app:layout_constraintTop_toBottomOf="@+id/chosen_product_rv"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

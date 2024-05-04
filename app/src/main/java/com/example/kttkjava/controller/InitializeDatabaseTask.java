@@ -16,7 +16,6 @@ import com.example.kttkjava.model.Name;
 import com.example.kttkjava.model.Payment;
 import com.example.kttkjava.model.Person;
 import com.example.kttkjava.model.Product;
-import com.example.kttkjava.model.ProductForSale;
 import com.example.kttkjava.model.Supplier;
 
 public class InitializeDatabaseTask extends AsyncTask<Void, Void, Void> {
@@ -44,7 +43,6 @@ public class InitializeDatabaseTask extends AsyncTask<Void, Void, Void> {
         PaymentDAO paymentDAO = db.paymentDAO();
         PersonDao personDao = db.personDao();
         ProductDAO productDAO = db.productDAO();
-        ProductForSaleDAO productForSaleDAO = db.productForSaleDAO();
         PurchaseInvoiceDAO purchaseInvoiceDAO = db.purchaseInvoiceDAO();
         PurchaseProductDAO purchaseProductDAO = db.purchaseProductDAO();
         ShipmentDAO shipmentDAO = db.shipmentDAO();
@@ -74,14 +72,17 @@ public class InitializeDatabaseTask extends AsyncTask<Void, Void, Void> {
 //        customerDAO.insert(new Customer(2,"10/10/2002","male",2,2,"teacher","PTIT",1000,500,2));
 //        lendingPartnerDAO.insert(new LendingPartner(3,"10/10/2002","male",2,2,"Ha Dong bank"));
 //        lendingPartnerDAO.insert(new LendingPartner(4,"10/10/1999","male",3,3,"Agribank"));
-//        lendingPartnerDAO.insert(new LendingPartner(7,"10/10/1999","male",3,3,"Sea bank"));
-//        productForSaleDAO.insert(new ProductForSale("product1",1500,"product1","warehouse1",100,1));
 
-//        collateralDAO.insert(new Collateral("collateral1","collateral1","1000$","good",2));
-//        installmentProductContractDAO.insert(new InstallmentProductContract(1500,1300,10,"10/04/2024","Ha Dong","10/02/2024",200,"30","pending",2,3));
+//        collateralDAO.insert(new Collateral("collateral1","collateral1","1000$","ACTIVE",2));
+////        installmentProductContractDAO.insert(new InstallmentProductContract(1500,1300,10,"10/04/2024","Ha Dong","10/02/2024",200,"30","pending",2,3));
 //        installmentProductDAO.insert(new InstallmentProduct(1,"jbox",1500,1,1));
 //        collateralInContractDAO.insert(new CollateralInContract(1000,"good",1,1));
 //        paymentDAO.insert(new Payment("10/10/2022","fist paid",2,3,1,200));
+//        paymentDAO.insert(new Payment("10/11/2022","second paid",2,3,1,200));
+//        for(int i = 13; i <= 13; i++) {
+//            collateralInContractDAO.delete(i);
+//            paymentDAO.deletePayment(i);
+//        }
 
 
         //db.close();

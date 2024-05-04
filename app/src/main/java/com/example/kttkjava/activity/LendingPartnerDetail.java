@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Address;
 import com.example.kttkjava.model.LPStatistic;
 import com.example.kttkjava.model.Name;
@@ -62,9 +63,10 @@ public class LendingPartnerDetail extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            name = MainActivity.instance.nameDao().getNameById(lpStatistic.getLendingPartner().getName_id());
-            addressObject = MainActivity.instance.addressDao().getAddressById(lpStatistic.getLendingPartner().getAddress_id());
-            paymentList = Arrays.asList(MainActivity.instance.paymentDAO().getAll());
+            AppDatabase instance = AppDatabase.getInstance(LendingPartnerDetail.this);
+            name = instance.nameDao().getNameById(lpStatistic.getLendingPartner().getName_id());
+            addressObject = instance.addressDao().getAddressById(lpStatistic.getLendingPartner().getAddress_id());
+            paymentList = Arrays.asList(instance.paymentDAO().getAll());
             return null;
         }
 

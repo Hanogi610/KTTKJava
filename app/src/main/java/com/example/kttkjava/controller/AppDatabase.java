@@ -2,14 +2,10 @@ package com.example.kttkjava.controller;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.kttkjava.model.Account;
 import com.example.kttkjava.model.Address;
@@ -24,7 +20,6 @@ import com.example.kttkjava.model.Name;
 import com.example.kttkjava.model.Payment;
 import com.example.kttkjava.model.Person;
 import com.example.kttkjava.model.Product;
-import com.example.kttkjava.model.ProductForSale;
 import com.example.kttkjava.model.PurchaseInvoice;
 import com.example.kttkjava.model.PurchaseProduct;
 import com.example.kttkjava.model.Shipment;
@@ -32,7 +27,7 @@ import com.example.kttkjava.model.Supplier;
 
 
 @Database(entities = {Account.class,Address.class, Collateral.class, CollateralInContract.class, Customer.class, Employee.class, InstallmentProduct.class,
-        InstallmentProductContract.class, LendingPartner.class,Name.class, Payment.class,Person.class, Product.class, ProductForSale.class, PurchaseInvoice.class,
+        InstallmentProductContract.class, LendingPartner.class,Name.class, Payment.class,Person.class, Product.class, PurchaseInvoice.class,
         PurchaseProduct.class, Shipment.class, Supplier.class}, version = 1)
 @TypeConverters({Converter.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -47,7 +42,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PersonDao personDao();
     public abstract EmployeeDao employeeDao();
     public abstract ProductDAO productDAO();
-    public abstract ProductForSaleDAO productForSaleDAO();
     public abstract PurchaseInvoiceDAO purchaseInvoiceDAO();
     public abstract PurchaseProductDAO purchaseProductDAO();
     public abstract ShipmentDAO shipmentDAO();

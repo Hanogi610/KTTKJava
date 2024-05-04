@@ -3,8 +3,7 @@ package com.example.kttkjava.model;
 import androidx.room.Entity;
 
 import java.util.Date;
-@Entity
-
+@Entity(tableName = "customer")
 public class Customer extends Person {
 
 	private String job;

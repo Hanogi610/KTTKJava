@@ -12,8 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.adapter.ChosenProductRvAdapter;
+import com.example.kttkjava.adapter.ChosenProductWORemoveBtnAdapter;
+import com.example.kttkjava.controller.AppDatabase;
+import com.example.kttkjava.model.ChosenProduct;
 import com.example.kttkjava.model.Employee;
 import com.example.kttkjava.model.Product;
 import com.example.kttkjava.model.PurchaseInvoice;
@@ -22,18 +28,21 @@ import com.example.kttkjava.model.Shipment;
 import com.example.kttkjava.model.Supplier;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
 public class PurchaseInvoiceActivity extends AppCompatActivity {
-    private TextView supplier, address,total, product;
+    private TextView supplier, address,total;
     private Button confirm, cancel;
+    private RecyclerView product;
     private int employeeId;
     private Shipment shipment;
     private Supplier supplierObject;
-    private Product productObject;
-    private PurchaseProduct purchaseProduct;
+    private ChosenProductWORemoveBtnAdapter adapter;
+    private ArrayList<ChosenProduct> chosenProducts;
+    private PurchaseInvoice purchaseInvoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,47 +62,47 @@ public class PurchaseInvoiceActivity extends AppCompatActivity {
         supplier = findViewById(R.id.supplier_textview);
         address = findViewById(R.id.address_textview);
         total = findViewById(R.id.total_textview);
-        product = findViewById(R.id.product_amount_textview);
         confirm = findViewById(R.id.confirm_button);
         cancel = findViewById(R.id.cancel_button);
+        product = findViewById(R.id.purchase_invoice_list);
+
         Intent intent = getIntent();
         shipment = (Shipment) intent.getSerializableExtra("shipment");
         supplierObject = (Supplier) intent.getSerializableExtra("supplier");
-        productObject = (Product) intent.getSerializableExtra("product");
-        purchaseProduct = (PurchaseProduct) intent.getSerializableExtra("purchaseProduct");
+        chosenProducts = (ArrayList<ChosenProduct>) intent.getSerializableExtra("chosen products");
 
+        adapter = new ChosenProductWORemoveBtnAdapter(chosenProducts);
+        product.setAdapter(adapter);
+        product.setLayoutManager(new LinearLayoutManager(this));
 
         supplier.setText(supplierObject.getName());
 
         address.setText(shipment.getDes());
 
-        // Generate a random number between 50 and 150
         Random random = new Random();
-        int randomNumber = random.nextInt(101) + 50; // This will generate a random number between 50 and 150
-
-        // Add the random number to the cost of the purchase product
-        float totalCost = purchaseProduct.getCost() + randomNumber;
-
-        // Set the total cost as the text of the total TextView
+        float totalCost = random.nextInt(101) + 50;
+        for(ChosenProduct chosenProduct : chosenProducts){
+            totalCost += chosenProduct.getCost();
+        }
         total.setText(String.valueOf(totalCost));
-        product.setText(productObject.getName() + " x " + purchaseProduct.getQuantity());
+
+
     }
     private void setup() {
         confirm.setOnClickListener(v -> {
             // Create a new PurchaseInvoice object
             float totalCost = Float.parseFloat(total.getText().toString());
             String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            int purchaseProductId = purchaseProduct.getId();
             int supplierId = supplierObject.getId();
             Intent intent = getIntent();
             Shipment shipment = (Shipment) intent.getSerializableExtra("shipment");
             int shipmentId = shipment.getId();
             //new getEmployee().execute();; // This is a placeholder for the employee ID
 
-            PurchaseInvoice purchaseInvoice = new PurchaseInvoice(totalCost, date, purchaseProductId, supplierId, shipmentId, 1);
+            purchaseInvoice = new PurchaseInvoice(totalCost, date, supplierId, shipmentId, 1);
 
             // Execute the saveInvoice AsyncTask
-            new saveInvoice().execute(purchaseInvoice);
+            new saveInvoice().execute();
         });
         cancel.setOnClickListener(v -> {
             finish();
@@ -102,7 +111,7 @@ public class PurchaseInvoiceActivity extends AppCompatActivity {
     private class getEmployee extends AsyncTask<Void, Void, Employee>{
         @Override
         protected Employee doInBackground(Void... voids) {
-            return MainActivity.instance.employeeDao().getAllEmployee()[0];
+            return AppDatabase.getInstance(getApplicationContext()).employeeDao().getAllEmployee()[0];
         }
 
         @Override
@@ -110,10 +119,24 @@ public class PurchaseInvoiceActivity extends AppCompatActivity {
             employeeId = employee.getId();
         }
     }
-    private class saveInvoice extends AsyncTask<PurchaseInvoice,Void,Void>{
+    private class saveInvoice extends AsyncTask<Void,Void,Void>{
+
         @Override
-        protected Void doInBackground(PurchaseInvoice... purchaseInvoices) {
-            MainActivity.instance.purchaseInvoiceDAO().insert(purchaseInvoices[0]);
+        protected Void doInBackground(Void... voids) {
+            AppDatabase instance = AppDatabase.getInstance(getApplicationContext());
+            long id = instance.shipmentDAO().insert(shipment);
+            Shipment s = instance.shipmentDAO().getShipmentById((int) id);
+            purchaseInvoice.setShipment_id(s.getId());
+            purchaseInvoice.setId((int) instance.purchaseInvoiceDAO().insert(purchaseInvoice));
+            for(ChosenProduct chosenProduct : chosenProducts){
+                PurchaseProduct purchaseProduct = new PurchaseProduct(
+                        chosenProduct.getProduct_id(),
+                        chosenProduct.getQuantity(),
+                        chosenProduct.getCost(),
+                        purchaseInvoice.getId()
+                );
+                instance.purchaseProductDAO().insert(purchaseProduct);
+            }
             return null;
         }
 
@@ -125,4 +148,5 @@ public class PurchaseInvoiceActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
 }
