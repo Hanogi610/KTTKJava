@@ -34,7 +34,7 @@ public class LendingPartnerAdapter extends RecyclerView.Adapter<LendingPartnerVi
     @Override
     public void onBindViewHolder(@NonNull LendingPartnerViewHolder holder, int position) {
         LPStatistic lendingPartner = lendingPartnerList.get(position);
-        holder.lendingPartnerName.setText(lendingPartner.getName());
+        holder.lendingPartnerName.setText(lendingPartner.getName() +" : " + lendingPartner.getRevenue());
         holder.detailButton.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), LendingPartnerDetail.class);
             intent.putExtra("lpStatistic", lendingPartner);

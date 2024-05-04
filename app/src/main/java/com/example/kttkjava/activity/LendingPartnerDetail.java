@@ -16,6 +16,10 @@ import com.example.kttkjava.R;
 import com.example.kttkjava.model.Address;
 import com.example.kttkjava.model.LPStatistic;
 import com.example.kttkjava.model.Name;
+import com.example.kttkjava.model.Payment;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class LendingPartnerDetail extends AppCompatActivity {
     private TextView companyName, firstName, lastName,middleName, address,revenue;
@@ -23,6 +27,7 @@ public class LendingPartnerDetail extends AppCompatActivity {
     private Address addressObject;
     private Button okButton;
     private LPStatistic lpStatistic;
+    private List<Payment> paymentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class LendingPartnerDetail extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             name = MainActivity.instance.nameDao().getNameById(lpStatistic.getLendingPartner().getName_id());
             addressObject = MainActivity.instance.addressDao().getAddressById(lpStatistic.getLendingPartner().getAddress_id());
+            paymentList = Arrays.asList(MainActivity.instance.paymentDAO().getAll());
             return null;
         }
 
@@ -66,11 +72,24 @@ public class LendingPartnerDetail extends AppCompatActivity {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             companyName.setText(lpStatistic.getLendingPartner().getCompanyName());
-            revenue.setText(String.valueOf(lpStatistic.getRevenue()));
+            String revenueString  = "";
+            for(Payment payment : paymentList){
+                if(payment.getLending_partner_id()==lpStatistic.getLendingPartner().getId()){
+                    revenueString += payment.getName() + " " +payment.getAmount() + " | ";
+                }
+            }
+            revenue.setText(revenueString);
             firstName.setText(name.getFirstName());
             lastName.setText(name.getLastName());
             middleName.setText(name.getMiddleName());
             address.setText(addressObject.getStreet() + ", " + addressObject.getDistrict() + ", " + addressObject.getCity() + ", " + addressObject.getProvince()+ ", " + addressObject.getCountry());
+        }
+    }
+    private class getPayment extends AsyncTask<Void, Void, Void >{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+           return null;
         }
     }
 }
