@@ -11,19 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kttkjava.R;
+import com.example.kttkjava.adapter.LPDetailPaymentRvAdapter;
 import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Address;
 import com.example.kttkjava.model.LPStatistic;
 import com.example.kttkjava.model.Name;
 import com.example.kttkjava.model.Payment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LendingPartnerDetail extends AppCompatActivity {
-    private TextView companyName, firstName, lastName,middleName, address,revenue;
+    private TextView companyName, firstName, lastName,middleName, address;
+    private RecyclerView paymentRv;
+    private LPDetailPaymentRvAdapter adapter;
+    private ArrayList<Payment> payments;
     private Name name;
     private Address addressObject;
     private Button okButton;
@@ -50,8 +57,11 @@ public class LendingPartnerDetail extends AppCompatActivity {
         lastName = findViewById(R.id.edit_last_name_textview);
         middleName = findViewById(R.id.edit_middle_name_textview);
         address = findViewById(R.id.address_textview);
-        revenue = findViewById(R.id.edit_revenue_textview);
+        paymentRv = findViewById(R.id.lp_payment_rv);
         okButton = findViewById(R.id.ok_button);
+
+        payments = new ArrayList<>();
+
         Intent intent = getIntent();
         lpStatistic = (LPStatistic) intent.getSerializableExtra("lpStatistic");
         new getInfor().execute();
@@ -74,17 +84,18 @@ public class LendingPartnerDetail extends AppCompatActivity {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             companyName.setText(lpStatistic.getLendingPartner().getCompanyName());
-            String revenueString  = "";
             for(Payment payment : paymentList){
                 if(payment.getLending_partner_id()==lpStatistic.getLendingPartner().getId()){
-                    revenueString += payment.getName() + " " +payment.getAmount() + " | ";
+                    payments.add(payment);
                 }
             }
-            revenue.setText(revenueString);
             firstName.setText(name.getFirstName());
             lastName.setText(name.getLastName());
             middleName.setText(name.getMiddleName());
             address.setText(addressObject.getStreet() + ", " + addressObject.getDistrict() + ", " + addressObject.getCity() + ", " + addressObject.getProvince()+ ", " + addressObject.getCountry());
+            adapter = new LPDetailPaymentRvAdapter(payments);
+            paymentRv.setAdapter(adapter);
+            paymentRv.setLayoutManager(new LinearLayoutManager(LendingPartnerDetail.this));
         }
     }
     private class getPayment extends AsyncTask<Void, Void, Void >{

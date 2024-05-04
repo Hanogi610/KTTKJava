@@ -18,11 +18,9 @@ import com.example.kttkjava.R;
 import com.example.kttkjava.adapter.SupplierAdapter;
 import com.example.kttkjava.controller.AppDatabase;
 import com.example.kttkjava.model.Supplier;
-import com.example.kttkjava.repository.SupplierRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
