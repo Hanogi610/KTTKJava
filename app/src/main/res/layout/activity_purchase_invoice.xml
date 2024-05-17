@@ -15,7 +15,6 @@
         android:text="Supplier"
         android:textSize="18sp"
         android:padding="5sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,7 +25,6 @@
         android:text="Address"
         android:padding="5sp"
         android:textSize="18sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/supplier_textview"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,7 +35,6 @@
         android:text="Total"
         android:padding="5sp"
         android:textSize="18sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/address_textview"
         app:layout_constraintStart_toStartOf="parent" />
 

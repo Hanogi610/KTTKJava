@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -95,7 +96,7 @@ public class LendingPartnerDetail extends AppCompatActivity {
             address.setText(addressObject.getStreet() + ", " + addressObject.getDistrict() + ", " + addressObject.getCity() + ", " + addressObject.getProvince()+ ", " + addressObject.getCountry());
             adapter = new LPDetailPaymentRvAdapter(payments);
             paymentRv.setAdapter(adapter);
-            paymentRv.setLayoutManager(new LinearLayoutManager(LendingPartnerDetail.this));
+            paymentRv.setLayoutManager(new GridLayoutManager(LendingPartnerDetail.this,1));
         }
     }
     private class getPayment extends AsyncTask<Void, Void, Void >{

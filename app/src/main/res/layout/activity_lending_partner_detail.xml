@@ -27,7 +27,6 @@
         android:text="Company Name"
         android:textSize="18sp"
         android:paddingTop="10sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -38,7 +37,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Company Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/company_name_textview"
@@ -52,7 +50,6 @@
         android:text="First Name"
         android:paddingTop="10sp"
         android:textSize="18sp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/company_name_textview"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,7 +60,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="First Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name_textview"
@@ -76,7 +72,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Middle Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_textview" />
@@ -88,7 +83,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Middle Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -101,7 +95,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Last Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -113,7 +106,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Last Name"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -126,7 +118,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Address"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -138,7 +129,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="10sp"
         android:text="Address"
-        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit_address_textview"
